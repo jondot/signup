@@ -5,27 +5,26 @@ A Go based service to take in beta signups.
 
 ## Deploying
 
-Signup is designed to be deployed on Heroku, and use the free-tier
-MongoDB plugins it can provide for storing contacts, so that you get a 0-maintenance , 0-cost
+Signup can be deployed on Heroku, and using the free-tier
+MongoDB plugins, it can provide for storing contacts, so that you get a 0-maintenance , 0-cost
 service.
 
 
-You'll need to add these environment variables, for example:
+You'll need to add these environment variables. for example:
 
     HOST        http://my-nifty-signup.heroku.com
     MONGO_HOST  http://example.com
     MONGO_DB    signup_prod
     PROJECTS    copycat bundleupon
-    KIOSK_MODE  set/unset
+    KIOSK_MODE* set/unset
 
 Note that `HOST` is needed in the case where you're using the inject
-feature. This is where you want the injected javascript code to point a
-`POST` at.
+feature. This is where you want the injected javascript code to `POST` at.
 
-On heroku it is simply `$ heroku config:add VAR=VALUE` foreach of
+On heroku it is simply `$ heroku config:add VAR=VALUE` for each of
 these that you want.
 
-Set `KIOSK_MODE` to any value to avoid saving contacts (running in demo
+* You only need to set `KIOSK_MODE` to any value to avoid saving contacts (running in demo
 mode).
 
 
@@ -42,7 +41,7 @@ Since this is Go, everything should be in a self contained binary. Just `go get`
 
 ## Usage
 
-You need to POST an `email` to a project that in your projects list.
+You need to POST an `email` to a project that is in your `PROJECTS` list.
 
     $ curl -vv -d "email=foo@example.com"
     http://signup.your-host.com:5000/your_project
@@ -71,12 +70,11 @@ Given that you have a form element with `signup-form` as ID, and an
 ## Using Precooked Script
 
 The signup server has a *special* endpoint that you can use to save
-yourself from manually coding the javascript POST code.
+yourself from manually placing the javascript POST code.
 
 It will inject a snippet of javascript which will hook onto your form:
 
-    <script type="text/javascript"
-src="http://your-heroku-signup-app.herokuapp.com/script/your-project-id/%23form-id"></script>
+    <script type="text/javascript" src="http://your-heroku-signup-app.herokuapp.com/script/your-project-id/%23form-id"></script>
 
 By default, on success it will show an element with the `signup-success`
 ID, and on failure it will show an element with the `signup-failure` id.
