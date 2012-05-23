@@ -1,6 +1,6 @@
 # Signup
 
-A Go based service to take in beta signups. Demo <a href="http://jondot.github.com/signup">is here</a>.
+A Go based service to take in beta signups. Demo <a href="http://jondot.github.com/signup">is here</a>, demo source <a href="https://github.com/jondot/signup/blob/master/example/signup.html">is here</a>.
 
 
 ## Deploying
