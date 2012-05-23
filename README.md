@@ -1,16 +1,57 @@
 # Signup
 
-A Go based service to take in beta signups. Demo <a href="http://jondot.github.com/signup">is here</a>, demo source <a href="https://github.com/jondot/signup/blob/master/example/signup.html">is here</a>.
+A Go based web service to collect signup emails. Great for when you need to
+set up a quick beta launch/signup landing page.
+
+Easily deployable to Heroku.
+
+Demo <a href="http://jondot.github.com/signup">is here</a>, demo source <a href="https://github.com/jondot/signup/blob/master/example/signup.html">is here</a>.
 
 
-## Deploying
+## Getting Started
 
-Signup can be deployed on Heroku, and using the free-tier
-MongoDB plugins, it can provide for storing contacts, so that you get a 0-maintenance , 0-cost
-service.
+Signup can be easily deployed on Heroku:
+
+    $ git clone git://github.com/jondot/signup.git
+    $ heroku create -s cedar --buildpack git@github.com:kr/heroku-buildpack-go.git
+
+Now go ahead and add a MongoDB plugin (which ever you prefer), then we
+continue:
+
+    $ heroku config:add HOST=http://<app-name>.herokuapp.com
+MONGO_HOST=http://user:pw@<host> MONGO_DB=signup PROJECTS=<project-name>
+
+Visit `http://app-name.herokuapp.com` and see if you get a `pong.`.
+
+## Usage
+
+You need to POST an `email` to a project that is in your `PROJECTS` list.
+
+    $ curl -d "email=foo@example.com" http://app-name.herokuapp.com/project-name
+
+### Ajax: Using Precooked Script
+
+The signup server has a *special* endpoint that you can use to save
+yourself from manually placing the javascript POST code.
+
+It will inject a snippet of javascript which will hook onto your form:
+
+    <script type="text/javascript" src="http://app-name.herokuapp.com/script/project-name/%23form-id"></script>
+
+To handle flash errors/success messages, by default, on success it will show an element with the `signup-success`
+ID, and on failure it will show an element with the `signup-failure` id.
+
+To reset errors/success, it will hide elements which has the `signup-flash` class.
 
 
-You'll need to add these environment variables. for example:
+
+
+
+## Details
+
+Here is a complete listing of the environment variables:
+
+### Environment
 
     HOST        http://my-nifty-signup.heroku.com
     MONGO_HOST  http://example.com
@@ -29,77 +70,24 @@ mode).
 
 
 
-### Details
-This uses the Go build pack. 
+### Build Pack and Hosting
 
-    heroku create -s cedar --buildpack git@github.com:kr/heroku-buildpack-go.git
+This uses the Go build pack:
+
+   $ heroku create -s cedar --buildpack git@github.com:kr/heroku-buildpack-go.git
 
 Alternatively, You can deploy this service very easily on
 your own server.   
 Since this is Go, everything should be in a self contained binary. Just `go get`, `go install` and run `signup`.
 
 
-## Usage
 
-You need to POST an `email` to a project that is in your `PROJECTS` list.
-
-    $ curl -vv -d "email=foo@example.com"
-    http://signup.your-host.com:5000/your_project
-
-## On a Page
-
-If you have some kind of landing page, you can easily POST the same
-details using ajax:
-
-      $(function(){
-          $('#signup-form').submit(function(){
-            $.post('http://your-heroku-signup-app.herokuapp.com/your-project-id', $(this).serialize(), function(data){
-                  // YAY!
-              })
-              .error(function(){
-                  // BOOHOO :(
-              });
-            return false;
-          });
-      });
-
-Given that you have a form element with `signup-form` as ID, and an
-`input` with a `name` of `email` it should work seamlessly.
-
-
-## Using Precooked Script
-
-The signup server has a *special* endpoint that you can use to save
-yourself from manually placing the javascript POST code.
-
-It will inject a snippet of javascript which will hook onto your form:
-
-    <script type="text/javascript" src="http://your-heroku-signup-app.herokuapp.com/script/your-project-id/%23form-id"></script>
-
-By default, on success it will show an element with the `signup-success`
-ID, and on failure it will show an element with the `signup-failure` id.
-
-It will hide elements which has the `signup-flash` class.
-
-
-You can tweak this behaviour:
-
-    Signup.reset(function(){
-      //CLEAR
-    });
-
-    Signup.success(function(){
-      //YAY!
-    });
-
-    Signup.failure(function(){
-      //BOOHOO!
-    });
 
 # Contributing
 
 Fork, implement, add tests, pull request, get my everlasting thanks and a respectable place here :).
 
+* Thanks to zeebo, jessta and rogpeppe of #go-nuts for helpful feedback!.
 
 # Copyright
 
