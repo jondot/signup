@@ -18,7 +18,8 @@ Signup can be easily deployed on Heroku:
 Now go ahead and add a MongoDB plugin (which ever you prefer), then we
 continue:
 
-    $ heroku config:add HOST=http://<app-name>.herokuapp.com MONGO_HOST=http://user:pw@<host> MONGO_DB=signup PROJECTS=<project-name>
+    $ heroku config:add HOST=http://<app-name>.herokuapp.com MONGO_HOST=mongodb://user:pw@<host> MONGO_DB=signup PROJECTS=<project-name>
+    $ git push heroku master
 
 Visit `http://app-name.herokuapp.com` and see if you get a `pong.`.
 
