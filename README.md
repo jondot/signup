@@ -18,8 +18,7 @@ Signup can be easily deployed on Heroku:
 Now go ahead and add a MongoDB plugin (which ever you prefer), then we
 continue:
 
-    $ heroku config:add HOST=http://<app-name>.herokuapp.com
-MONGO_HOST=http://user:pw@<host> MONGO_DB=signup PROJECTS=<project-name>
+    $ heroku config:add HOST=http://<app-name>.herokuapp.com MONGO_HOST=http://user:pw@<host> MONGO_DB=signup PROJECTS=<project-name>
 
 Visit `http://app-name.herokuapp.com` and see if you get a `pong.`.
 
@@ -74,7 +73,7 @@ mode).
 
 This uses the Go build pack:
 
-   $ heroku create -s cedar --buildpack git@github.com:kr/heroku-buildpack-go.git
+    $ heroku create -s cedar --buildpack git@github.com:kr/heroku-buildpack-go.git
 
 Alternatively, You can deploy this service very easily on
 your own server.   
