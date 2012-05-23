@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Signup</title>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Signup</h1>
+        <p><a
+          href="https://github.com/jondot/signup">Github repo</a>
+        for more information, <a
+          href="http://twitter.com/jondot">@jondot</a> for updates.</p>
+        <form id="signup-form">
+          <div class="controls">
+            <div class="input-append">
+              <input name="email" class="span5 input-xlarge"
+              id="appendedInputButtons" size="16" type="text"
+              placeholder="email address"><button type="submit"
+                id="btn-submit" class="btn btn-primary
+                btn-xlarge">Signup</button>
+            </div>
+         </div>
+        </form>
+          
+        <div id="signup-success" class="signup-flash">
+            Great! we'll email you when we have a slot open!
+        </div>
+        <div id="signup-failure" class="signup-flash">
+          Sorry, there might not be signup slots available right now. Please check back later.
+        </div>
+      </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript"
+      src="http://signup-kiosk-mode.herokuapp.com/script/test/%23signup-form" charset="utf-8"></script>
+  </body>
+</html>
+
